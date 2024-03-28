@@ -27,14 +27,13 @@ FROM quay.io/centos/centos:stream9 as repos
 
 FROM quay.io/centos-bootc/bootc-image-builder:latest as builder
 ARG MANIFEST=centos-bootc.yaml
-# XXX: we should just make sure our in-tree c9s repo points to the c9s paths and doesn't require vars to avoid these steps entirely
-COPY --from=repos /etc/dnf/vars /etc/dnf/vars
-COPY --from=repos /etc/yum.repos.d/centos.repo c9s.repo
 COPY --from=repos /etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial /etc/pki/rpm-gpg
-# rpm-ostree doesn't honor /etc/dnf/vars right now
-RUN for n in $(ls /etc/dnf/vars); do v=$(cat /etc/dnf/vars/$n); sed -ie s,\$${n},$v, c9s.repo; done
 RUN --mount=type=cache,target=/workdir \
     --mount=type=bind,rw=true,src=.,dst=/buildcontext,bind-propagation=shared \
+    --mount=type=bind,src=./cachi2-output,dst=/cachi2 \
+    rm /buildcontext/*.repo && \
+    cp /cachi2/deps/rpm/$(uname -m)/repos.d/cachi2.repo /buildcontext/cachi2.repo && \
+    sed -i -e '/\[appstream-devel\]/a\' -e gpgcheck=0 /buildcontext/cachi2.repo && \
     rpm-ostree compose image --cachedir=/workdir --format=ociarchive --initialize /buildcontext/${MANIFEST} /buildcontext/out.ociarchive
 
 FROM oci-archive:./out.ociarchive

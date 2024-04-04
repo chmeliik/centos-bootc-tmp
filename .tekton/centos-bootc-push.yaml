@@ -213,14 +213,16 @@ spec:
         value: $(params.image-expires-after)
       - name: COMMIT_SHA
         value: $(tasks.clone-repository.results.commit)
+      - name: PLATFORM
+        value: linux/amd64
       runAfter:
       - prefetch-dependencies
       taskRef:
         params:
         - name: name
-          value: buildah
+          value: buildah-remote
         - name: bundle
-          value: quay.io/redhat-appstudio-tekton-catalog/task-buildah:0.1@sha256:e1e6c6308b8c7d5aa2faa02129af7fcc9e8dc4bbfe741c1acab5c9edca28fb77
+          value: quay.io/redhat-appstudio-tekton-catalog/task-buildah-remote:0.1@sha256:c380654c48b292a0234b97d0bd5b4e29529407a90cde63d716647b053123e076
         - name: kind
           value: task
         resolver: bundles

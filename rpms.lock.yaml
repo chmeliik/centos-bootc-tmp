@@ -2626,18 +2626,6 @@
           "checksum": "sha256:a658684608dc353b9b5b3749315391ad7abc17b15f53c5576663ea8515691266",
           "size": 561203,
           "repoid": "baseos"
-        },
-        {
-          "url": "https://composes.stream.centos.org/development/CentOS-Stream-9-20240304.d.0/compose/BaseOS/x86_64/os/Packages/acl-2.3.1-4.el9.x86_64.rpm",
-          "checksum": "sha256:ef31699d8c9ec9775e14e4bb3f9cd780288b2c0de3d3c57b6e33d388afba9876",
-          "size": 70397,
-          "repoid": "baseos-devel"
-        },
-        {
-          "url": "https://download.copr.fedorainfracloud.org/results/walters/fedora-bootc-fasttracks/centos-stream-9-x86_64/07095115-ostree/ostree-grub2-2024.4-3.el9.x86_64.rpm",
-          "checksum": "sha256:1f99025e073b5e9981fdbb0b2749f671706dde666237cc404ac93a8344caf5ef",
-          "size": 11795,
-          "repoid": "copr-fedora-bootc-fasttracks"
         }
       ],
       "source": [

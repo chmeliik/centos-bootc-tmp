@@ -222,7 +222,7 @@ spec:
         - name: name
           value: buildah-remote
         - name: bundle
-          value: quay.io/acmiel-test/task-buildah-remote@sha256:6a1d7d99884f2f4938dc46ecfe7c1b974a9a54204ef2f7a3b9d6a3d9b7b61f9d
+          value: quay.io/acmiel-test/task-buildah-remote@sha256:d9fe0b85184104f8a46328144d4fd8c2589680c4040059795192132ffae6105d
         - name: kind
           value: task
         resolver: bundles

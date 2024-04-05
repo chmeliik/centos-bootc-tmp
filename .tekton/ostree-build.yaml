@@ -168,6 +168,8 @@ spec:
       params:
       - name: input
         value: $(params.prefetch-input)
+      - name: for-output-dir
+        value: ""
       runAfter:
       - clone-repository
       taskRef:
@@ -175,7 +177,7 @@ spec:
         - name: name
           value: prefetch-dependencies
         - name: bundle
-          value: quay.io/redhat-appstudio-tekton-catalog/task-prefetch-dependencies:0.1@sha256:e29adab9f66415b3be2e89e154c03ec685900fdad90051a555d7d027f94f874e
+          value: quay.io/acmiel-test/task-prefetch-dependencies:0.1-devpkgmans
         - name: kind
           value: task
         resolver: bundles
@@ -191,6 +193,8 @@ spec:
       params:
       - name: input
         value: $(params.prefetch-input)
+      - name: for-output-dir
+        value: ""
       runAfter:
       - clone-repository-arm64
       taskRef:
@@ -198,7 +202,7 @@ spec:
         - name: name
           value: prefetch-dependencies
         - name: bundle
-          value: quay.io/redhat-appstudio-tekton-catalog/task-prefetch-dependencies:0.1@sha256:e29adab9f66415b3be2e89e154c03ec685900fdad90051a555d7d027f94f874e
+          value: quay.io/acmiel-test/task-prefetch-dependencies:0.1-devpkgmans
         - name: kind
           value: task
         resolver: bundles
@@ -235,7 +239,7 @@ spec:
           - name: name
             value: rpm-ostree
           - name: bundle
-            value: quay.io/redhat-appstudio-tekton-catalog/task-rpm-ostree:0.1@sha256:8691f0a12dca3a4066d3f18ec11473d5ec0d680d58f764fb0e77cd3ff27009fe
+            value: quay.io/acmiel-test/task-rpm-ostree:0.1-cachi2
           - name: kind
             value: task
         resolver: bundles
@@ -272,7 +276,7 @@ spec:
           - name: name
             value: rpm-ostree
           - name: bundle
-            value: quay.io/redhat-appstudio-tekton-catalog/task-rpm-ostree:0.1@sha256:8691f0a12dca3a4066d3f18ec11473d5ec0d680d58f764fb0e77cd3ff27009fe
+            value: quay.io/acmiel-test/task-rpm-ostree:0.1-cachi2
           - name: kind
             value: task
         resolver: bundles

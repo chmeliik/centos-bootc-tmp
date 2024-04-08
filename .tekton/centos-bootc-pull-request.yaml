@@ -31,7 +31,8 @@ spec:
     - name: config-file
       value: "centos-bootc-config.json"
     - name: prefetch-input
-      value: rpm
+      value: |
+        {"type": "rpm", "repo_options": {"appstream-devel": {"gpgcheck": "0"}}}
     - name: hermetic
       value: "true"
   pipelineRef:

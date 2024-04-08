@@ -229,7 +229,7 @@ spec:
         - name: PLATFORM
           value: linux/amd64
         - name: BUILDER_IMAGE
-          value: quay.io/centos-bootc/bootc-image-builder:latest
+          value: quay.io/acmiel-test/bootc-image-builder:centos-key-in-etc-pki
         - name: CONFIG_FILE
           value: $(params.config-file)
       runAfter:

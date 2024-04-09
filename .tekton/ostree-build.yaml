@@ -232,6 +232,8 @@ spec:
           value: quay.io/acmiel-test/bootc-image-builder:centos-key-in-etc-pki
         - name: CONFIG_FILE
           value: $(params.config-file)
+        - name: HERMETIC
+          value: $(params.hermetic)
       runAfter:
         - prefetch-dependencies
       taskRef:
@@ -239,7 +241,7 @@ spec:
           - name: name
             value: rpm-ostree
           - name: bundle
-            value: quay.io/acmiel-test/task-rpm-ostree:0.1-cachi2
+            value: quay.io/acmiel-test/task-rpm-ostree:0.1-cachi2-hermetic
           - name: kind
             value: task
         resolver: bundles
@@ -269,6 +271,8 @@ spec:
           value: quay.io/acmiel-test/bootc-image-builder:centos-key-in-etc-pki
         - name: CONFIG_FILE
           value: $(params.config-file)
+        - name: HERMETIC
+          value: $(params.hermetic)
       runAfter:
         - prefetch-dependencies-arm64
       taskRef:
@@ -276,7 +280,7 @@ spec:
           - name: name
             value: rpm-ostree
           - name: bundle
-            value: quay.io/acmiel-test/task-rpm-ostree:0.1-cachi2
+            value: quay.io/acmiel-test/task-rpm-ostree:0.1-cachi2-hermetic
           - name: kind
             value: task
         resolver: bundles

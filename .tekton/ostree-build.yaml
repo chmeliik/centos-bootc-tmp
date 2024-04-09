@@ -189,31 +189,6 @@ spec:
       workspaces:
       - name: source
         workspace: workspace
-    - name: prefetch-dependencies-arm64
-      params:
-      - name: input
-        value: $(params.prefetch-input)
-      - name: dev-package-managers
-        value: "true"
-      runAfter:
-      - clone-repository-arm64
-      taskRef:
-        params:
-        - name: name
-          value: prefetch-dependencies
-        - name: bundle
-          value: quay.io/acmiel-test/task-prefetch-dependencies:0.1-devpacman
-        - name: kind
-          value: task
-        resolver: bundles
-      when:
-      - input: $(params.hermetic)
-        operator: in
-        values:
-        - "true"
-      workspaces:
-      - name: source
-        workspace: workspace-arm64
     - name: build-container-amd64
       params:
         - name: IMAGE
@@ -272,9 +247,9 @@ spec:
         - name: CONFIG_FILE
           value: $(params.config-file)
         - name: HERMETIC
-          value: $(params.hermetic)
+          value: "false"
       runAfter:
-        - prefetch-dependencies-arm64
+        - clone-repository-arm64
       taskRef:
         params:
           - name: name

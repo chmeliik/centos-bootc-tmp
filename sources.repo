@@ -1,0 +1,24 @@
+[appstream-sources]
+name=CentOS Stream 9 - AppStream - Sources
+baseurl=http://mirror.stream.centos.org/9-stream/AppStream/source/tree
+gpgcheck=1
+repo_gpgcheck=0
+enabled=1
+gpgkey=file:///usr/share/distribution-gpg-keys/centos/RPM-GPG-KEY-CentOS-Official
+
+[appstream-devel-sources]
+name=CentOS Stream 9 development - AppStream - Sources
+baseurl=https://composes.stream.centos.org/development/CentOS-Stream-9-20240304.d.0/compose/AppStream/source/tree
+gpgcheck=1
+repo_gpgcheck=0
+enabled=1
+gpgkey=file:///usr/share/distribution-gpg-keys/centos/RPM-GPG-KEY-CentOS-Testing
+priority=1000
+
+[baseos-sources]
+name=CentOS Stream 9 - BaseOS - Sources
+baseurl=http://mirror.stream.centos.org/9-stream/BaseOS/source/tree
+gpgcheck=1
+repo_gpgcheck=0
+enabled=1
+gpgkey=file:///usr/share/distribution-gpg-keys/centos/RPM-GPG-KEY-CentOS-Official

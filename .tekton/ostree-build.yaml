@@ -168,8 +168,8 @@ spec:
       params:
       - name: input
         value: $(params.prefetch-input)
-      - name: for-output-dir
-        value: ""
+      - name: dev-package-managers
+        value: "true"
       runAfter:
       - clone-repository
       taskRef:
@@ -177,7 +177,7 @@ spec:
         - name: name
           value: prefetch-dependencies
         - name: bundle
-          value: quay.io/acmiel-test/task-prefetch-dependencies:0.1-devpkgmans-and-custom-cachi2
+          value: quay.io/acmiel-test/task-prefetch-dependencies:0.1-devpacman
         - name: kind
           value: task
         resolver: bundles
@@ -193,8 +193,8 @@ spec:
       params:
       - name: input
         value: $(params.prefetch-input)
-      - name: for-output-dir
-        value: ""
+      - name: dev-package-managers
+        value: "true"
       runAfter:
       - clone-repository-arm64
       taskRef:
@@ -202,7 +202,7 @@ spec:
         - name: name
           value: prefetch-dependencies
         - name: bundle
-          value: quay.io/acmiel-test/task-prefetch-dependencies:0.1-devpkgmans-and-custom-cachi2
+          value: quay.io/acmiel-test/task-prefetch-dependencies:0.1-devpacman
         - name: kind
           value: task
         resolver: bundles

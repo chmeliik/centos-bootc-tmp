@@ -241,7 +241,7 @@ spec:
           - name: name
             value: rpm-ostree
           - name: bundle
-            value: quay.io/acmiel-test/task-rpm-ostree:0.1-cachi2-hermetic
+            value: quay.io/acmiel-test/task-rpm-ostree:0.1-merge-cachi2-sbom
           - name: kind
             value: task
         resolver: bundles
@@ -280,7 +280,7 @@ spec:
           - name: name
             value: rpm-ostree
           - name: bundle
-            value: quay.io/acmiel-test/task-rpm-ostree:0.1-cachi2-hermetic
+            value: quay.io/acmiel-test/task-rpm-ostree:0.1-merge-cachi2-sbom
           - name: kind
             value: task
         resolver: bundles

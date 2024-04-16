@@ -164,6 +164,56 @@ spec:
           workspace: workspace-arm64
         - name: basic-auth
           workspace: git-auth
+    - name: prefetch-dependencies
+      params:
+      - name: input
+        value: $(params.prefetch-input)
+      - name: dev-package-managers
+        value: "true"
+      runAfter:
+      - clone-repository
+      taskRef:
+        params:
+        - name: name
+          value: prefetch-dependencies
+        - name: bundle
+          value: quay.io/acmiel-test/task-prefetch-dependencies:0.1-devpacman
+        - name: kind
+          value: task
+        resolver: bundles
+      when:
+      - input: $(params.hermetic)
+        operator: in
+        values:
+        - "true"
+      workspaces:
+      - name: source
+        workspace: workspace
+    - name: prefetch-dependencies-arm64
+      params:
+      - name: input
+        value: $(params.prefetch-input)
+      - name: dev-package-managers
+        value: "true"
+      runAfter:
+      - clone-repository-arm64
+      taskRef:
+        params:
+        - name: name
+          value: prefetch-dependencies
+        - name: bundle
+          value: quay.io/acmiel-test/task-prefetch-dependencies:0.1-devpacman
+        - name: kind
+          value: task
+        resolver: bundles
+      when:
+      - input: $(params.hermetic)
+        operator: in
+        values:
+        - "true"
+      workspaces:
+      - name: source
+        workspace: workspace-arm64
     - name: build-container-amd64
       params:
         - name: IMAGE
@@ -179,17 +229,19 @@ spec:
         - name: PLATFORM
           value: linux/amd64
         - name: BUILDER_IMAGE
-          value: quay.io/centos-bootc/bootc-image-builder:latest
+          value: quay.io/acmiel-test/bootc-image-builder:centos-key-in-etc-pki
         - name: CONFIG_FILE
           value: $(params.config-file)
+        - name: HERMETIC
+          value: $(params.hermetic)
       runAfter:
-        - clone-repository
+        - prefetch-dependencies
       taskRef:
         params:
           - name: name
             value: rpm-ostree
           - name: bundle
-            value: quay.io/redhat-appstudio-tekton-catalog/task-rpm-ostree:0.1@sha256:8691f0a12dca3a4066d3f18ec11473d5ec0d680d58f764fb0e77cd3ff27009fe
+            value: quay.io/acmiel-test/task-rpm-ostree:0.1-merge-cachi2-sbom
           - name: kind
             value: task
         resolver: bundles
@@ -212,21 +264,23 @@ spec:
         - name: IMAGE_EXPIRES_AFTER
           value: $(params.image-expires-after)
         - name: COMMIT_SHA
-          value: $(tasks.clone-repository.results.commit)
+          value: $(tasks.clone-repository-arm64.results.commit)
         - name: PLATFORM
           value: linux/arm64
         - name: BUILDER_IMAGE
-          value: quay.io/centos-bootc/bootc-image-builder:latest
+          value: quay.io/acmiel-test/bootc-image-builder:centos-key-in-etc-pki
         - name: CONFIG_FILE
           value: $(params.config-file)
+        - name: HERMETIC
+          value: $(params.hermetic)
       runAfter:
-        - clone-repository-arm64
+        - prefetch-dependencies-arm64
       taskRef:
         params:
           - name: name
             value: rpm-ostree
           - name: bundle
-            value: quay.io/redhat-appstudio-tekton-catalog/task-rpm-ostree:0.1@sha256:8691f0a12dca3a4066d3f18ec11473d5ec0d680d58f764fb0e77cd3ff27009fe
+            value: quay.io/acmiel-test/task-rpm-ostree:0.1-merge-cachi2-sbom
           - name: kind
             value: task
         resolver: bundles
@@ -265,6 +319,33 @@ spec:
           operator: in
           values:
             - "true"
+
+    - name: build-source-image
+      params:
+      - name: BINARY_IMAGE
+        value: $(params.output-image)
+      - name: BASE_IMAGES
+        value: $(tasks.build-container-amd64.results.BASE_IMAGES_DIGESTS)
+      runAfter:
+      - build-container
+      taskRef:
+        params:
+        - name: name
+          value: source-build
+        - name: bundle
+          value: quay.io/redhat-appstudio-tekton-catalog/task-source-build:0.1@sha256:90dc9c66eb0123b5e5ff8a1b8c3891e91f0e952899e427eeca79b635fe81a348
+        - name: kind
+          value: task
+        resolver: bundles
+      when:
+      - input: $(tasks.init.results.build)
+        operator: in
+        values:
+        - "true"
+      workspaces:
+      - name: workspace
+        workspace: workspace
+
     - name: inspect-image
       params:
         - name: IMAGE_URL

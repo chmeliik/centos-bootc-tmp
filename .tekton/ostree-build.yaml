@@ -177,7 +177,7 @@ spec:
         - name: name
           value: prefetch-dependencies
         - name: bundle
-          value: quay.io/acmiel-test/task-prefetch-dependencies:0.1-devpacman
+          value: quay.io/acmiel-test/task-prefetch-dependencies:0.1-echoHOME
         - name: kind
           value: task
         resolver: bundles
@@ -202,7 +202,7 @@ spec:
         - name: name
           value: prefetch-dependencies
         - name: bundle
-          value: quay.io/acmiel-test/task-prefetch-dependencies:0.1-devpacman
+          value: quay.io/acmiel-test/task-prefetch-dependencies:0.1-echoHOME
         - name: kind
           value: task
         resolver: bundles
